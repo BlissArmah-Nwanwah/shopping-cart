@@ -18,7 +18,7 @@
 
         <div class="button-container">
             <button class="remove">Remove</button>
-            <button class="add">Add</button>
+            <button class="add" @click="addToCart()" >Add</button>
         </div>
     </div>
     </div>
@@ -28,9 +28,14 @@
 <script>
 export default{
     props: ['product', 'active'],
+    methods:{
+        addToCart(){
+            this.$store.commit('addToCart',this.product)
+        },
+    },
     computed:{
         product_total(){
-            return 56.00
+            return this.$store.getters.productQuantity(this.product)
         }
     }
 }
@@ -65,14 +70,60 @@ export default{
     left: -105vw;
     padding: 15px;
     transition: left .5s;
-    z-index: 101;
+    z-index: 100;
     overflow-y: scroll;
 
     &.show{
         left: 0;
     } 
- }
+
+}
+
+.drawer-close{
+    font-size: 1.5rem;
+    padding: 5px;
+    border-radius: 5px;
+    right:10px;
+    border: 2px solid gray;
+    color: gray;
+    width: 15px;
+    float: right;
+    cursor: pointer;
+
+    &:hover{
+        background: lightgray;
+    }
+}
+
+.product-details{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    p.desription{
+        padding: 20px;
+        line-height: 1.5rem;
+    }
+
+    .button-container{
+        button{
+            width: 150px;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 0 5px 50px 5px;
+            cursor: pointer;
+        }
 
 
+    }
+}
+
+
+@media (min-width:500px) {
+    .drawer{
+        width:450px ;
+    }
+}
  
 </style>

@@ -1,9 +1,9 @@
 <template>
   <div class="home">
   <div class="propuct-cards-container"> 
-    <ProductDescriptionDrawer :product="product" :active="active.product_drawer" />
+    <ProductDescriptionDrawer :product="product" :active="active.product_drawer" v-on:close-product-drawer="closeProduct()" />
  <ProductSummaryCard 
- v-for="product in items" :key="product.id" :product="product" v-on:view-product="viewProduct($event)" />
+ v-for="product in items" :key="product.id" :product="product" v-on:view-product="viewProduct($event) " />
   </div>
   </div>
 </template>
@@ -25,14 +25,17 @@ export default {
       items: items,
       product: null,
       active : {
-        product_drawer : true
+        product_drawer : false
       }
     }
   },
   methods: {
     viewProduct(product){
       this.product = product
-      console.log(this.product);
+      this.active.product_drawer = true
+    },
+    closeProduct(){
+      this.active.product_drawer = false
     }
   },
 }
