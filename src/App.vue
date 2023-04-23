@@ -1,10 +1,20 @@
 <template>
   <nav>
-    <router-link :class="{active: $route.name === 'home'}" to="/">Home</router-link> |
+    <router-link :class="{active: $route.name === 'home'}" to="/">Home</router-link>  
     <router-link :class="{active: $route.name === 'cart'}"  to="/cart">Cart</router-link>
   </nav>
   <router-view/>
 </template>
+
+
+<script>
+export default{
+mounted(){
+  this.$store.commit('updateCartFromLocalStorage')
+}
+}
+</script>
+
 
 <style lang="scss">
 #app {
