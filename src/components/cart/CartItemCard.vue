@@ -16,7 +16,7 @@ export default{
    props: ['product'],
    computed:{
       description(){
-         return this.product.description.substring(0,120)
+         return this.product.description?.substring(0,120)
       },
       item_cost(){
          return this.product.price * this.product.quantity

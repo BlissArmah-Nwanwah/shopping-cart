@@ -17,6 +17,9 @@ export default createStore({
     },
     cartItems: state =>{
       return state.cart
+    },
+    cartTotal : state =>{
+      return state.cart.reduce((a,b)=> a + (b.price * b.quantity), 0)
     }
   },
   mutations: {
